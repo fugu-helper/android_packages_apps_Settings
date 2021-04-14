@@ -920,6 +920,34 @@
                 android:value="true" />
         </activity>
 
+        <activity android:name="Settings$UsbRoleSettingsActivity"
+                android:label="@string/usb_role_title"
+                android:icon="@drawable/ic_settings_display"
+                android:taskAffinity="">
+            <intent-filter android:priority="1">
+                <action android:name="com.android.settings.USB_ROLE_SETTINGS" />
+                <action android:name="android.settings.USB_ROLE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
+                <category android:name="com.android.settings.SHORTCUT" />
+            </intent-filter>
+            <intent-filter android:priority="7">
+                <action android:name="com.android.settings.action.SETTINGS" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.category"
+                android:value="com.android.settings.category.ia.homepage" />
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.UsbRoleSettings" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+            <meta-data android:name="com.android.settings.summary"
+                android:resource="@string/usb_role_dashboard_summary"/>
+        </activity>
+
         <activity android:name="Settings$NightDisplaySuggestionActivity"
             android:enabled="@*android:bool/config_nightDisplayAvailable"
             android:taskAffinity=""

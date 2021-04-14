@@ -62,6 +62,7 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.SearchActivity;
 import com.android.settings.wfd.WifiDisplaySettings;
 import com.android.settings.widget.SwitchBar;
+import com.android.settings.UsbRoleSettings;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
 import java.util.ArrayList;
@@ -826,6 +827,9 @@ public class SettingsActivity extends SettingsDrawerActivity
                         Settings.PrintSettingsActivity.class.getName()),
                 pm.hasSystemFeature(PackageManager.FEATURE_PRINTING), isAdmin)
                 || somethingChanged;
+
+        somethingChanged = setTileEnabled(new ComponentName(packageName,
+                        Settings.UsbRoleSettingsActivity.class.getName()), true, isAdmin);
 
         final boolean showDev = mDevelopmentPreferences.getBoolean(
                 DevelopmentSettings.PREF_SHOW, android.os.Build.TYPE.equals("eng"))

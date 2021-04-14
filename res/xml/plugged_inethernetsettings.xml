@@ -1,0 +1,73 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+        android:title="@string/ethernet1_settings_category">
+
+    <SwitchPreference
+        android:key="toggle_plugethernet"
+        android:title="PluggedIn_Ethernet" />
+
+    <Preference
+        android:key="pluggedinethernet_change_settings"
+        android:title="Change Pluggedinethernet settings"
+        android:dependency="toggle_plugethernet" />
+
+    <Preference
+        style="?android:preferenceInformationStyle"
+        android:key="ethernet_ip_settings"
+        android:title="IP settings"
+        android:shouldDisableView="True" />
+
+    <Preference
+        style="?android:preferenceInformationStyle"
+        android:key="ethernet_ip_address"
+        android:title="IP address"
+        android:shouldDisableView="True" />
+
+    <Preference
+        style="?android:preferenceInformationStyle"
+        android:key="ethernet_netmask"
+        android:title="Network prefix length"
+        android:shouldDisableView="True" />
+
+    <Preference
+        style="?android:preferenceInformationStyle"
+        android:key="ethernet_default_gateway"
+        android:title="Default gateway"
+        android:shouldDisableView="True" />
+
+    <Preference
+        style="?android:preferenceInformationStyle"
+        android:key="ethernet_dns"
+        android:title="DNS servers"
+        android:shouldDisableView="True" />
+
+    <Preference
+        style="?android:preferenceInformationStyle"
+        android:key="ethernet_proxy_server"
+        android:title="Proxy server"
+        android:shouldDisableView="True" />
+
+    <Preference
+        style="?android:preferenceInformationStyle"
+        android:key="ethernet_proxy_port"
+        android:title="Proxy port"
+        android:shouldDisableView="True" />
+
+    <Preference
+        style="?android:preferenceInformationStyle"
+        android:key="ethernet_proxy_exclusion"
+        android:title="Proxy exclusion"
+        android:shouldDisableView="True" />
+
+    <Preference
+        style="?android:preferenceInformationStyle"
+        android:key="ethernet_interface_name"
+        android:title="Interface name"
+        android:shouldDisableView="True" />
+
+    <Preference
+        style="?android:preferenceInformationStyle"
+        android:key="ethernet_mac_address"
+        android:title="MAC address"
+        android:shouldDisableView="True" />
+
+</PreferenceScreen>

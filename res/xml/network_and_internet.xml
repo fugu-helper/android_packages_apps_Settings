@@ -32,6 +32,22 @@
     </com.android.settings.widget.MasterSwitchPreference>
 
     <com.android.settingslib.RestrictedPreference
+       android:fragment="com.android.settings.ethernet.EthernetSettings"
+       android:key="toggle_ethernet"
+       android:title="@string/ethernet_settings_title"
+       android:icon="@drawable/ic_settings_ethernet"
+       android:order="-10">
+    </com.android.settingslib.RestrictedPreference>
+
+    <com.android.settingslib.RestrictedPreference
+       android:fragment="com.android.settings.ethernet.Plugged_InEthernetSettings"
+       android:key="toggle_plugethernet"
+       android:title="@string/ethernet1_settings_title"
+       android:icon="@drawable/ic_settings_ethernet"
+       android:order="-10">
+    </com.android.settingslib.RestrictedPreference>
+
+    <com.android.settingslib.RestrictedPreference
         android:key="mobile_network_settings"
         android:title="@string/network_settings_title"
         android:summary="@string/summary_placeholder"

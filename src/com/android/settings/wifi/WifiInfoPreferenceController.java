@@ -26,7 +26,20 @@ import android.support.v4.text.BidiFormatter;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
+import java.io.*;
+import java.net.*;
+import java.util.*;
+import static java.lang.System.out;
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 
+import android.util.Log;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -42,8 +55,11 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 public class WifiInfoPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnResume, OnPause {
 
+    private static final String TAG = "WifiInfoPreferenceController";
+
     private static final String KEY_CURRENT_IP_ADDRESS = "current_ip_address";
     private static final String KEY_MAC_ADDRESS = "mac_address";
+    public String MACAddress = null;
 
     private final IntentFilter mFilter;
     private final WifiManager mWifiManager;
@@ -96,7 +112,26 @@ public class WifiInfoPreferenceController extends AbstractPreferenceController
     public void updateWifiInfo() {
         if (mWifiMacAddressPref != null) {
             final WifiInfo wifiInfo = mWifiManager.getConnectionInfo();
-            final String macAddress = wifiInfo == null ? null : wifiInfo.getMacAddress();
+
+       AsyncCaller info = new AsyncCaller();
+                info.execute();
+                try {
+
+                        info.get();
+                }
+                catch(Exception e) {
+
+                        Log.e(TAG, "Exception is " + e.getMessage());
+
+                        e.printStackTrace();
+                }
+
+
+
+            final String macAddress = MACAddress ;
+
+  Log.e(TAG, "mac address is  " + macAddress);
+
             mWifiMacAddressPref.setSummary(!TextUtils.isEmpty(macAddress)
                     ? macAddress
                     : mContext.getString(R.string.status_unavailable));
@@ -119,4 +154,58 @@ public class WifiInfoPreferenceController extends AbstractPreferenceController
             }
         }
     };
+      private class AsyncCaller extends AsyncTask<Void, Void, Void>
+        {
+
+                @Override
+                        protected void onPreExecute() {
+                                super.onPreExecute();
+                        }
+
+                @Override
+                        protected Void doInBackground(Void... params) {
+                                InetAddress ip;
+                                try {
+
+                                        Enumeration<NetworkInterface> nie = NetworkInterface.getNetworkInterfaces();
+                                        for (NetworkInterface netint : Collections.list(nie)) {
+                                                Log.e(TAG,"Interface name is : " + netint.getDisplayName());
+                                                Log.e(TAG,"Interface name is : " + netint.getName());
+
+                                                if ((netint.getName().compareTo("wlan0") == 0) ||
+                                                    (netint.getName().compareTo("mlan0") == 0))
+                                                {
+
+                                                        byte[] mac = netint.getHardwareAddress();
+                                                        StringBuilder sb = new StringBuilder();
+
+                                                        if (mac == null)
+                                                        {
+                                                                Log.e(TAG,"mac is null");
+                                                                return null;
+                                                        }
+                                                        for (int i = 0; i < mac.length; i++) {
+                                                                sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? ":" : ""));
+                                                        }
+
+                                                        MACAddress = sb.toString();
+                                                        break;
+                                                }
+
+                                        }
+
+                                } catch (Exception e) {
+
+                                    Log.e(TAG, "Exception is " + e.getMessage());
+
+                                    e.printStackTrace();
+                             }
+        return null;
+        }
+
+        @Override
+                protected void onPostExecute(Void result) {
+                }
+        //this method will be running on UI thread
+   }
 }

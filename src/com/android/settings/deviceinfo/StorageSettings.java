@@ -92,6 +92,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
 
     private StorageSummaryPreference mInternalSummary;
     private static long sTotalInternalStorage;
+    private String last_fragment_class = "";
 
     @Override
     public int getMetricsCategory() {
@@ -233,8 +234,16 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
             // Only showing primary internal storage, so just shortcut
             final Bundle args = new Bundle();
             args.putString(VolumeInfo.EXTRA_VOLUME_ID, VolumeInfo.ID_PRIVATE_INTERNAL);
+
+            String fragment_class = StorageDashboardFragment.class.getName();
+            if (last_fragment_class.equals(fragment_class)) {
+                return;
+            }
+
+            last_fragment_class = fragment_class;
+
             Intent intent = Utils.onBuildStartFragmentIntent(getActivity(),
-                    StorageDashboardFragment.class.getName(), args, null,
+                    fragment_class, args, null,
                     R.string.storage_settings, null, false, getMetricsCategory());
             intent.putExtra(SettingsDrawerActivity.EXTRA_SHOW_MENU, true);
             getActivity().startActivity(intent);
@@ -245,6 +254,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
     @Override
     public void onResume() {
         super.onResume();
+        last_fragment_class = "";
         mStorageManager.registerListener(mStorageListener);
         refresh();
     }

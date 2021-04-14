@@ -801,6 +801,21 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
             if (mPasswordEntry != null) {
                 mPasswordEntry.scheduleShowSoftInput();
+
+                //At this time, Navigation bar may not show. after Navigation bar shown,
+                //keyboard will be covered by Navigation bar.
+                //Listen the layout change, we can restartInput to make Keyboard fully visible when Navigation shown.
+                getWindow().getDecorView().addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+                    @Override
+                    public void onLayoutChange(View v, int left, int top, int right, int bottom,
+                                               int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                        if ( oldBottom != 0 && bottom != oldBottom
+                                && imm.isActive(mPasswordEntry) ) {
+                            imm.restartInput(mPasswordEntry);
+                        }
+                    }
+                });
+
             }
         }
 

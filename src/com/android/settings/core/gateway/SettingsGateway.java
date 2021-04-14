@@ -131,6 +131,7 @@ import com.android.settings.wifi.WifiAPITest;
 import com.android.settings.wifi.WifiInfo;
 import com.android.settings.wifi.WifiSettings;
 import com.android.settings.wifi.p2p.WifiP2pSettings;
+import com.android.settings.UsbRoleSettings;
 
 public class SettingsGateway {
 
@@ -252,7 +253,8 @@ public class SettingsGateway {
             WebViewAppPicker.class.getName(),
             LockscreenDashboardFragment.class.getName(),
             BluetoothDeviceDetailsFragment.class.getName(),
-            DataUsageList.class.getName()
+            DataUsageList.class.getName(),
+            UsbRoleSettings.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {
@@ -269,6 +271,8 @@ public class SettingsGateway {
             Settings.AccessibilitySettingsActivity.class.getName(),
             Settings.SystemDashboardActivity.class.getName(),
             SupportDashboardActivity.class.getName(),
+            Settings.UsbRoleSettingsActivity.class.getName(),
+
             // Home page > Network & Internet
             Settings.WifiSettingsActivity.class.getName(),
             Settings.DataPlanUsageSummaryActivity.class.getName(),

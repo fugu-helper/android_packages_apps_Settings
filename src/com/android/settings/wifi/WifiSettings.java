@@ -788,7 +788,12 @@ public class WifiSettings extends RestrictedSettingsFragment
         for (; index < numAccessPoints; index++) {
             AccessPoint accessPoint = accessPoints.get(index);
             // Ignore access points that are out of range.
-            if (accessPoint.isReachable()) {
+                /**
+                 *  Since we are getting wrong time stamp value for Hotspot AP from the down layer
+                 *  Hence temporarily Commenting this filter which is filtering out the Hotspot AP
+                 */
+                //if (accessPoint.isReachable()) {
+
                 String key = AccessPointPreference.generatePreferenceKey(accessPoint);
                 hasAvailableAccessPoints = true;
                 LongPressAccessPointPreference pref =
@@ -811,7 +816,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                 mAccessPointsPreferenceCategory.addPreference(preference);
                 accessPoint.setListener(WifiSettings.this);
                 preference.refresh();
-            }
+            //}
         }
         removeCachedPrefs(mAccessPointsPreferenceCategory);
         mAddPreference.setOrder(index);

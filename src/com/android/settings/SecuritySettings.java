@@ -142,8 +142,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
             KEY_SHOW_PASSWORD, KEY_UNIFICATION, KEY_VISIBLE_PATTERN_PROFILE
     };
 
-    // Only allow one trust agent on the platform.
-    private static final boolean ONLY_ONE_TRUST_AGENT = true;
+    // Enable multiple trust agent on the platform.
+    private static final boolean ONLY_ONE_TRUST_AGENT = false;
 
     private static final int MY_USER_ID = UserHandle.myUserId();
 

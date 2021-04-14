@@ -1009,6 +1009,25 @@
         <item>Pink</item>
         <item>Red</item>
     </string-array>
+    <!-- Ethernet -->
+    <!-- Ethernet IP settings. -->
+    <!-- Note that adding/removing/moving the items will need ethernet settings code change. -->
+    <string-array name="ethernet_ip_settings">
+        <!-- Use DHCP (Dynamic Host Configuration Protocol) for obtaining IP settings [CHAR LIMIT=25] -->
+        <item>DHCP</item>
+        <!-- Use statically defined IP settings [CHAR LIMIT=25]-->
+        <item>Static</item>
+    </string-array>
+
+    <!-- Ethernet proxy settings. -->
+    <!-- Note that adding/removing/moving the items will need ethernet settings code change. -->
+    <string-array name="ethernet_proxy_settings">
+        <!-- No HTTP proxy is used for the current ethernet network [CHAR LIMIT=25] -->
+        <item>None</item>
+        <!-- Manual HTTP proxy settings are used for the current ethernet network [CHAR LIMIT=25] -->
+        <item>Manual</item>
+    </string-array>
+
 
     <!-- Automatic storage management settings. The amount of days for the automatic storage manager
          to retain. These are shown in a list dialog. [CHAR LIMIT=70] -->
@@ -1038,4 +1057,13 @@
         <item>never</item>
     </string-array>
 
+    <string-array name="usb_list_entries">
+        <item>Device</item>
+        <item>Host</item>
+    </string-array>
+
+    <string-array name="usb_list_values">
+        <item>device</item>
+        <item>host</item>
+    </string-array>
 </resources>
